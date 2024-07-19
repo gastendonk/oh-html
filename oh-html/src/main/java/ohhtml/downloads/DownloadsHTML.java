@@ -119,7 +119,8 @@ public class DownloadsHTML {
             if (files.size() == 1) {
                 return "<a href=\"/" + getWord() + "?file=" + Escaper.urlEncode(files.get(0).toString(), "") + "\">" + files.get(0).getName() + "</a>";
             } else {
-                return "<a href=\"/" + getWord() + "?zip=" + Escaper.urlEncode(key, "") + ".zip\">" + key + ".zip (" + files.size() + ")</a>";
+                String dn = getKeyPrefixForZip(files.get(0)) + key + ".zip";
+                return "<a href=\"/" + getWord() + "?zip=" + Escaper.urlEncode(dn, "") + "\">" + key + ".zip (" + files.size() + ")</a>";
             }
         } else { // list of download links
             String ret = "";
@@ -137,5 +138,9 @@ public class DownloadsHTML {
     
     protected String noDownloads(String lang) {
         return "de".equals(lang) ? "[keine Downloads]" : "[no downloads]";
+    }
+    
+    protected String getKeyPrefixForZip(File aFile) {
+        return "";
     }
 }

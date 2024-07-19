@@ -29,9 +29,6 @@ public class GetAttachments implements GetDownloads {
             a = a.substring(0, a.length() - ".html".length());
         }
         id = a;
-        if (debug) {
-            System.out.println("GetAttachments(" + page + ") id: " + id);
-        }
     }
 
     @Override
