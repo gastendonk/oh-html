@@ -14,7 +14,7 @@ import org.pmw.tinylog.Logger;
 import com.github.template72.data.DataList;
 import com.github.template72.data.DataMap;
 
-import github.soltaufintel.amalia.web.action.Escaper;
+import ohhtml.base.Escaper;
 
 /**
  * Table of contents macro: generate TOC at begin of page, if getTocHeadingsLevels() or getTocSubpagesLevels() are greater 0.

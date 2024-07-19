@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import github.soltaufintel.amalia.web.action.Escaper;
+import ohhtml.base.Escaper;
 
 /**
  * Insert download areas into HTML

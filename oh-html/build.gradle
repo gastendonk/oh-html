@@ -10,29 +10,19 @@ compileJava.options.encoding = 'UTF-8'
 compileTestJava.options.encoding = 'UTF-8'
 
 dependencies {
-    implementation 'com.github.SoltauFintel.amalia:amalia-web:0.16.0' // versuchen loszuwerden
-    api 'com.github.template72:template72:1.0.0'
     implementation 'org.jsoup:jsoup:1.16.1'
     implementation 'commons-io:commons-io:2.12.0'
+    implementation 'commons-lang:commons-lang:2.6'
+    implementation 'com.github.template72:template72:1.0.0'
+    implementation 'org.tinylog:tinylog:1.3.6'
 }
 
 repositories {
     mavenCentral()
     maven { url 'https://jitpack.io' }
-    maven { url 'https://www.javaxt.com/maven' }
+//    maven { url 'https://www.javaxt.com/maven' }
 }
 
 java {
     withSourcesJar()
-}
-    
-publishing { // for jitpack.io
-    publications {
-        maven(MavenPublication) {
-            groupId project.group
-            artifactId project.name
-            version findProperty('version')
-            from components.java
-        }
-    }
 }
