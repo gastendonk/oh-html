@@ -19,17 +19,25 @@ public class GetAttachments implements GetDownloads {
 
     public GetAttachments(String page) {
         int o = page.indexOf("#");
+        String a;
         if (o >= 0) {
-            id = page.substring(0, o);
+            a = page.substring(0, o);
         } else {
-            id = page;
+            a = page;
+        }
+        if (a.endsWith(".html")) {
+            a = a.substring(0, a.length() - ".html".length());
+        }
+        id = a;
+        if (debug) {
+            System.out.println("GetAttachments(" + page + ") id: " + id);
         }
     }
 
     @Override
     public List<Download> getDownloads(String customer) {
         if (debug) {
-            System.out.println("GetAttachments.getDownloads(" + customer + "), " + id);
+            System.out.println("GetAttachments.getDownloads(" + customer + "), id=" + id);
         }
         Set<String> filenames = getFilenames();
         String dir = attachmentsFolder + id;

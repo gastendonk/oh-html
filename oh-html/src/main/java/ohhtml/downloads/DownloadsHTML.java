@@ -27,6 +27,10 @@ public class DownloadsHTML {
             return html;
         }
         List<Download> downloads = supplier.getDownloads(customer);
+        if (GetAttachments.debug) {
+        for (Download d : downloads) {
+            System.out.println("- Download: getFileInWorkspace=" +d.getFileInWorkspace() + " | filename="+d.getFilename() + " | name="+d.getName()+" | keys: "+d.getKeys());
+        }}
         List<DownloadOccurrence> oc = findOccurrences(html);
         if (GetAttachments.debug) {
             System.out.println("findOccurrences: " + oc.size() + " | downloads: " + downloads.size());
@@ -37,9 +41,22 @@ public class DownloadsHTML {
         for (DownloadOccurrence c : oc) {
             List<Download> filteredDownloads;
             if (c.getKey().isEmpty()) { // empty key means all files
+                if (GetAttachments.debug) {
+                    System.out.println("Ast 1: alle");
+                }
                 filteredDownloads = downloads;
             } else {
+                if (GetAttachments.debug) {
+                    System.out.println("Ast 2: Selektion: " + c.getKey());
+                }
                 filteredDownloads = downloads.stream().filter(d -> d.getKeys().contains(c.getKey())).collect(Collectors.toList());
+                if (GetAttachments.debug && filteredDownloads.isEmpty()) {
+                    System.out.println("filteredDownloads is empty -----> filteredDownloads = downloads");
+                    filteredDownloads = downloads;
+                }                
+            }
+            if (GetAttachments.debug) {
+                System.out.println("filteredDownloads size: " + filteredDownloads.size());
             }
             html = html.replace(c.getText(), makeDownloadComponent(c, filteredDownloads, lang));
         }
