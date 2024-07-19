@@ -9,6 +9,9 @@ compileJava.options.encoding = 'UTF-8'
 compileTestJava.options.encoding = 'UTF-8'
 
 dependencies {
+    implementation 'com.github.SoltauFintel.amalia:amalia-web:0.16.0' // versuchen loszuwerden
+    api 'com.github.template72:template72:1.0.0'
+    implementation 'org.jsoup:jsoup:1.16.1'
 }
 
 repositories {
