@@ -13,9 +13,8 @@ import ohhtml.base.FileService;
 import ohhtml.downloads.DownloadsHTML.GetDownloads;
 
 public class GetAttachments implements GetDownloads {
+    private static final String attachmentsFolder = "attachments/";
     private final String id;
-    public static boolean debug = true;
-    public static String attachmentsFolder = "attachments/";
 
     public GetAttachments(String page) {
         int o = page.indexOf("#");
@@ -33,9 +32,6 @@ public class GetAttachments implements GetDownloads {
 
     @Override
     public List<Download> getDownloads(String customer) {
-        if (debug) {
-            System.out.println("GetAttachments.getDownloads(" + customer + "), id=" + id);
-        }
         Set<String> filenames = getFilenames();
         String dir = attachmentsFolder + id;
         List<Attachment> attachments = list(dir, filenames);
@@ -60,10 +56,6 @@ public class GetAttachments implements GetDownloads {
                     filenames.add(file.getName());
                 }
             }
-        }
-        if (debug) {
-            System.out.println("GetAttachments.getFilenames: dir = " + dir.getAbsolutePath());
-            System.out.println("GetAttachments.getFilenames:       " + filenames);
         }
         return filenames;
     }
@@ -91,11 +83,6 @@ public class GetAttachments implements GetDownloads {
         }
         List<Attachment> ret = new ArrayList<>(map.values());
         ret.sort((a, b) -> a.getFilename().compareToIgnoreCase(b.getFilename()));
-        if (debug) {
-            for (Attachment att : ret) {
-                System.out.println("Attachment: " + att.getFilename() + " | " + att.getCategories());
-            }
-        }
         return ret;
     }
 }
