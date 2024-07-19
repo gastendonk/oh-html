@@ -27,7 +27,14 @@ public class DownloadsHTML {
             return html;
         }
         List<Download> downloads = supplier.getDownloads(customer);
-        for (DownloadOccurrence c : findOccurrences(html)) {
+        List<DownloadOccurrence> oc = findOccurrences(html);
+        if (GetAttachments.debug) {
+            System.out.println("findOccurrences: " + oc.size() + " | downloads: " + downloads.size());
+            for (DownloadOccurrence c : oc) {
+                System.out.println("- DownloadOccurrence: " + c.getKey() + " | " + c.getText() + " | " + c.isOne());
+            }
+        }
+        for (DownloadOccurrence c : oc) {
             List<Download> filteredDownloads;
             if (c.getKey().isEmpty()) { // empty key means all files
                 filteredDownloads = downloads;
