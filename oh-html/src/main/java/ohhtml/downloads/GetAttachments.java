@@ -48,6 +48,7 @@ public class GetAttachments implements GetDownloads {
             d.setName(att.getFilename());
             d.getKeys().addAll(att.getCategories());
             d.getCustomers().add(customer);
+            d.getFiles().add(new File(dir, att.getFilename()));
             return d;
         }).collect(Collectors.toList());
     }
