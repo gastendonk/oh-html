@@ -12,6 +12,7 @@ dependencies {
     implementation 'com.github.SoltauFintel.amalia:amalia-web:0.16.0' // versuchen loszuwerden
     api 'com.github.template72:template72:1.0.0'
     implementation 'org.jsoup:jsoup:1.16.1'
+    implementation 'commons-io:commons-io:2.12.0'
 }
 
 repositories {

@@ -16,6 +16,9 @@ import com.github.template72.data.DataMap;
 
 import github.soltaufintel.amalia.web.action.Escaper;
 
+/**
+ * Table of contents macro: generate TOC at begin of page, if getTocHeadingsLevels() or getTocSubpagesLevels() are greater 0.
+ */
 public class TocMacro {
     protected final TocMacroPage page;
     protected final String customer;
