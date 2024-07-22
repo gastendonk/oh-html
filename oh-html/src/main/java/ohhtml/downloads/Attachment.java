@@ -16,10 +16,12 @@ public class Attachment {
     }
 
     public void fromString(String pCategories) {
-        for (String cat : pCategories.split(",")) {
-            cat = cat.trim();
-            if (!cat.isEmpty()) {
-                categories.add(cat);
+        if (pCategories != null) {
+            for (String cat : pCategories.split(",")) {
+                cat = cat.trim().toLowerCase();
+                if (!cat.isEmpty()) {
+                    categories.add(cat);
+                }
             }
         }
     }
