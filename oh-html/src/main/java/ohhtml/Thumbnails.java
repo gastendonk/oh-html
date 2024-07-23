@@ -57,6 +57,16 @@ public class Thumbnails {
      * @param html the whole HTML string
      * @param tag tag name
      * @param attr attribute name
+     * @return set of attribute values
+     */
+    public static Set<String> findHtmlTags(String html, String tag, String attr) {
+        return findHtmlTags(html, tag, attr, all -> true, false);
+    }
+ 
+    /**
+     * @param html the whole HTML string
+     * @param tag tag name
+     * @param attr attribute name
      * @param filter attribute value filter
      * @param returnOne return first occurence
      * @return set of attribute values
