@@ -17,12 +17,44 @@ dependencies {
     implementation 'org.tinylog:tinylog:1.3.6'
 }
 
+// gradlew.bat -Pgroup= -Pversion= -Pownrepo= -Prepourl= -Prepouser= -Prepopass=  publish
+
 repositories {
-    mavenCentral()
-    maven { url 'https://jitpack.io' }
-//    maven { url 'https://www.javaxt.com/maven' }
+    def ownrepo = findProperty('ownrepo')
+    if (ownrepo != null && ownrepo != '') {
+        maven {
+            url = ownrepo
+            allowInsecureProtocol = true
+        }
+    } else {
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
 }
 
 java {
     withSourcesJar()
+}
+
+publishing {
+    publications {
+        artifactory(MavenPublication) {
+            from components.java
+        }
+    }
+ 
+    repositories {
+        maven {
+            url = findProperty('repourl')
+            allowInsecureProtocol = true
+            credentials {
+                username findProperty('repouser')
+                password findProperty('repopass')
+            }
+        }
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs << '-Xlint:unchecked'
 }
