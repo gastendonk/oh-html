@@ -26,6 +26,7 @@ public class TocMacro {
     protected final String liStyle;
     private String toc = null;
     private IPage seite; // can be null
+    private String helpKeysText = "Hilfe-Keys";
     
     public TocMacro(TocMacroPage page, String customer, String lang, String liStyle) {
         this.page = page;
@@ -76,13 +77,16 @@ public class TocMacro {
             heading.attr("id", entry.getId().substring("#".length())); // modify HTML
             if (seite != null) {
                 List<String> helpKeys = seite.getHeadingHelpKeys(lang, title);
-                if (helpKeys.isEmpty()) {
-                    heading.append("<a href=\"" + page.getId() + "/help-keys/" + lang + "/" + lfd + "\" class=\"edithk0\">Hilfe-Keys</a>");
-                } else {
-                    heading.append("<a href=\"" + page.getId() + "/help-keys/" + lang + "/" + lfd + "\" class=\"edithk1\">Hilfe-Keys: "
-                            + helpKeys.stream().collect(Collectors.joining(", "))
-                            + "</a>");
-                }
+				String css;
+				String ext = "";
+				if (helpKeys.isEmpty()) {
+					css = "edithk0"; // invisible link
+				} else {
+					css = "edithk1"; // visible link
+					ext = ": " + helpKeys.stream().collect(Collectors.joining(", "));
+				}
+				String link = page.getId() + "/help-keys/" + lang + "/" + lfd;
+				heading.append("<a href=\"" + link + "\" class=\"" + css + "\">" + Escaper.esc(getHelpKeysText() + ext) + "</a>");
             }
             
             int level = Integer.parseInt(heading.nodeName().substring(1, 2));
@@ -229,4 +233,12 @@ public class TocMacro {
         }
         return false;
     }
+
+	public String getHelpKeysText() {
+		return helpKeysText;
+	}
+
+	public void setHelpKeysText(String helpKeysText) {
+		this.helpKeysText = helpKeysText;
+	}
 }
