@@ -18,6 +18,8 @@ import ohhtml.base.Escaper;
 
 /**
  * Table of contents macro: generate TOC at begin of page, if getTocHeadingsLevels() or getTocSubpagesLevels() are greater 0.
+ * 
+ * Also generate invisible help keys links for editing help keys for headings (anchor linking).
  */
 public class TocMacro {
     protected final TocMacroPage page;

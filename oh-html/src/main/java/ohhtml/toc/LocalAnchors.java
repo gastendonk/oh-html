@@ -21,7 +21,7 @@ public class LocalAnchors {
         Map<String, Heading> headings = getHeadings(doc);
         boolean dirty = false;
         int nr = 0;
-        for (Element e : doc.selectXpath("//a")) {
+        for (Element e : doc.select("a")) {
             String href = e.attr("href");
             if (href.startsWith("#")) {
                 String heading = href.substring(1).trim();
@@ -40,10 +40,8 @@ public class LocalAnchors {
 
     private Map<String, Heading> getHeadings(Document doc) {
         Map<String, Heading> headings = new HashMap<>();
-        for (int i = 2; i <= 6; i++) {
-            for (Element e : doc.selectXpath("//h" + i)) {
-                headings.put(e.text().trim(), new Heading(e));
-            }
+        for (Element e : doc.select("h2,h3,h4,h5,h6")) {
+            headings.put(e.wholeOwnText().trim(), new Heading(e));
         }
         return headings;
     }
