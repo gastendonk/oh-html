@@ -15,6 +15,8 @@ dependencies {
     implementation 'commons-lang:commons-lang:2.6'
     implementation 'com.github.template72:template72:1.0.0'
     implementation 'org.tinylog:tinylog:1.3.6'
+
+    testImplementation 'junit:junit:4.12'
 }
 
 // gradlew.bat -Pgroup= -Pversion= -Pownrepo= -Prepourl= -Prepouser= -Prepopass=  publish
