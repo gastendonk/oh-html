@@ -14,6 +14,7 @@ public class TocEntry {
     private final Set<String> labels = new TreeSet<>();
     private final List<String> helpKeys = new ArrayList<>();
     private final List<TocEntry> subpages = new ArrayList<>();
+    private final List<String> links = new ArrayList<>();
 
     public String getId() {
         return id;
@@ -41,5 +42,12 @@ public class TocEntry {
 
     public List<TocEntry> getSubpages() {
         return subpages;
+    }
+
+    /**
+     * @return cross-book links, format: book folder + "/" + page ID
+     */
+    public List<String> getLinks() {
+        return links;
     }
 }
