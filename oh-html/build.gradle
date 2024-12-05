@@ -45,20 +45,22 @@ java {
 
 publishing {
     publications {
-/*        artifactory(MavenPublication) {
+        artifactory(MavenPublication) {
             from components.java
         }
-*/
+
         // git2jar        
-        maven(MavenPublication) {
-            groupId project.group
-            artifactId project.name
-            version findProperty('version')
-            from components.java
+        publications {
+            maven(MavenPublication) {
+                groupId project.group
+                artifactId project.name
+                version findProperty('version')
+                from components.java
+            }
         }
     }
  
-/*    repositories {
+    repositories {
         maven {
             url = findProperty('repourl')
             allowInsecureProtocol = true
@@ -68,7 +70,6 @@ publishing {
             }
         }
     }
-*/
 }
 
 tasks.withType(JavaCompile) {
