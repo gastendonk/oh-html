@@ -79,16 +79,7 @@ public class TocMacro {
             heading.attr("id", entry.getId().substring("#".length())); // modify HTML
             if (seite != null) {
                 List<String> helpKeys = seite.getHeadingHelpKeys(lang, title);
-				String css;
-				String ext = "";
-				if (helpKeys.isEmpty()) {
-					css = "edithk0"; // invisible link
-				} else {
-					css = "edithk1"; // visible link
-					ext = ": " + helpKeys.stream().collect(Collectors.joining(", "));
-				}
-				String link = page.getId() + "/help-keys/" + lang + "/" + lfd;
-				heading.append("<a href=\"" + link + "\" class=\"" + css + "\">" + Escaper.esc(getHelpKeysText() + ext) + "</a>");
+				heading.append(makeHeading(helpKeys, lfd));
             }
             
             int level = Integer.parseInt(heading.nodeName().substring(1, 2));
@@ -110,6 +101,27 @@ public class TocMacro {
                 entries.add(entry);
             }
         }
+    }
+    
+    protected String makeHeading(List<String> helpKeys, int lfd) {
+		String css;
+		String ext = "";
+		if (helpKeys.isEmpty()) {
+			css = "edithk0"; // invisible link
+		} else {
+			css = "edithk1"; // visible link
+			ext = ": " + formatHeadingHelpKeys(helpKeys);
+		}
+		String link = getHeadingHelpKeysLink(lfd);
+    	return "<a href=\"" + link + "\" class=\"" + css + "\">" + Escaper.esc(getHelpKeysText() + ext) + "</a>";
+    }
+    
+    protected String formatHeadingHelpKeys(List<String> helpKeys) {
+    	return helpKeys.stream().collect(Collectors.joining(", "));
+    }
+    
+    protected String getHeadingHelpKeysLink(int lfd) {
+    	return page.getId() + "/help-keys/" + lang + "/" + lfd;
     }
     
     public static boolean ignoreHeading(Element heading, IPage seite) {
