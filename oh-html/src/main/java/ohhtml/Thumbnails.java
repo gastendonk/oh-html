@@ -47,7 +47,8 @@ public class Thumbnails {
                     }
                 }
             } catch (Exception e) {
-                System.err.println(id + " | thumbnail: " + dn + " => " + file.getAbsolutePath() + " => " + e.getMessage());
+				System.err.println("[oh-html] Page ID: " + id + " | thumbnail: " + dn + " => " + file.getAbsolutePath()
+						+ " => " + e.getClass().getSimpleName() + ": " + e.getMessage());
             }
         }
         return html;
