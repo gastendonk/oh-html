@@ -29,6 +29,9 @@ public class Thumbnails {
         Set<String> img = findHtmlTags(html, "img", "src", i -> true, false);
         for (String dn : img) {
             File file = new File(folder + "/" + dn);
+            if (!file.isFile()) {
+                continue;
+            }
             try {
                 BufferedImage picture = ImageIO.read(file);
                 int width = picture.getWidth();
