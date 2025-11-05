@@ -20,13 +20,14 @@ public class LocalAnchorsTest {
 
     @Test
     public void missingIdAttr() {
-        String html = "<html><body><h1>Hello</h1><p>Bla <a href=\"#target 1\">Anchor link</a> ...<a href=\"#Hello\">hello</a></p><h2>target 1</h2><p>blub ...</p></body></html>";
+        String html = "<html><body><h2>Hello</h2><p>Bla <a href=\"#target 1\">Anchor link</a> ..."
+                + "<a href=\"#Hello\">hello</a></p><h3>target 1</h3><p>blub ...</p></body></html>";
         
         String html2 = new LocalAnchors().transform(html);
         
         Document doc = Jsoup.parse(html2);
-        check("j2", 1, "hello", doc);
-        check("j1", 2, "Anchor link", doc);
+        check("j2", 2, "hello", doc);
+        check("j1", 3, "Anchor link", doc);
     }
 
     @Test
